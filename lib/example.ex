@@ -1,5 +1,7 @@
 defmodule Example do
-  require Runtime
+  defmodule State do
+    defstruct [:step1, :step2]
+  end
 
   def run() do
     data1 = %{
@@ -45,10 +47,14 @@ defmodule Example do
     comp1 = Code.compile_quoted(mod1)
     comp2 = Code.compile_quoted(mod2)
 
-    Enum.each(comp1, fn {mod, _} -> Code.ensure_loaded!(mod) end)
-    Enum.each(comp2, fn {mod, _} -> Code.ensure_loaded!(mod) end)
+    Enum.each(comp1, fn {mod, _} ->
+      Code.ensure_loaded!(mod)
+      mod.start_link(%State{})
+    end)
 
-    MyUniqueStateMachine.start_link(%MyUniqueStateMachine.State{})
-    MyUniqueStateMachine2.start_link(%MyUniqueStateMachine2.State{})
+    Enum.each(comp2, fn {mod, _} ->
+      Code.ensure_loaded!(mod)
+      mod.start_link(%State{})
+    end)
   end
 end

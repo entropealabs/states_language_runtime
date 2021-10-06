@@ -5,10 +5,6 @@ defmodule Runtime do
       defmodule unquote(name) do
         use StatesLanguage, data: unquote(data)
 
-        defmodule State do
-          defstruct [:step1, :step2]
-        end
-
         require Logger
 
         def handle_resource("Start", _, "TheFirst", data) do
