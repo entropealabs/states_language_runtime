@@ -10,13 +10,13 @@ defmodule Example do
       "States" => %{
         "TheFirst" => %{
           "Type" => "Task",
-          "Resource" => "Start",
+          "Resource" => "Call:+13135550101",
           "TransitionEvent" => ":next",
           "Next" => "TheSecond"
         },
         "TheSecond" => %{
           "Type" => "Task",
-          "Resource" => "End",
+          "Resource" => "Hangup",
           "End" => true
         }
       }
@@ -30,13 +30,13 @@ defmodule Example do
       "States" => %{
         "TheFirst" => %{
           "Type" => "Task",
-          "Resource" => "Start2",
+          "Resource" => "Hold:30",
           "TransitionEvent" => ":next",
           "Next" => "TheSecond"
         },
         "TheSecond" => %{
           "Type" => "Task",
-          "Resource" => "End2",
+          "Resource" => "Hangup2",
           "End" => true
         }
       }
